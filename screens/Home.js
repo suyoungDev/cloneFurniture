@@ -26,7 +26,6 @@ const Title = styled.Text`
   color: ${COLORS.black};
 `;
 
-
 const ScrollableTab = ({ tabList, selectedTab, onPress }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -65,6 +64,7 @@ const ScrollableCard = ({navigation, productList}) => {
   const renderCard = ({ item }) => (
     <TouchableOpacity
       style={{ marginLeft: SIZES.padding }}
+      onPress={() => navigation.navigate('ItemDetail', {'itemInfo': item})}
     >
       <View style={{ width: SIZES.width/2 }}>
         <Image 
@@ -243,6 +243,78 @@ const Home =({navigation})=>{
   })
 
   // render
+  function renderPromotionCard(){
+    return(
+      <View
+        style={{
+          flexDirection: 'row',
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.radius * 1,
+          padding: SIZES.radius,
+          height: 110,
+          borderRadius: 20,
+          backgroundColor: COLORS.white,
+          elevation: 2
+        }}
+      >
+        <View style={{
+          width: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: COLORS.lightGray2,
+          borderRadius: 20
+        }}>
+          <Image 
+            source={images.sofa}
+            resizeMode='contain'
+            style={{
+              width: '60%',
+              height: '60%'
+            }}
+          />
+        </View>
+
+        {/* Wordings Section */}
+        <View style={{
+          marginLeft: SIZES.padding,
+          flex: 1,
+          justifyContent: 'center'
+        }}>
+          <Text style={{...FONTS.h2, color: COLORS.secondary}}>Special Offer</Text>
+          <Text style={{...FONTS.body3, color: COLORS.gray}}>Adding to your cart</Text>
+        </View>
+
+        {/* Button */}
+        <View style={{
+          marginRight: SIZES.radius,
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.primary,
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '80%',
+              width: 40,
+              borderRadius: 10
+            }}
+            onPress={() => {}}
+          >
+            <Image 
+              source={icons.chevron}
+              resizeMode='contain'
+              style={{
+                height: '30%',
+                height: '30%'
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
+
   function renderTitle(title){
     return(
       <View style={{marginTop: SIZES.padding, marginHorizontal: SIZES.padding}}>
@@ -251,7 +323,6 @@ const Home =({navigation})=>{
       </View>
     )
   }
-
 
   function renderHeader(){
     return(
@@ -311,9 +382,10 @@ const Home =({navigation})=>{
 
       {/* Footer - Promotion Card */}
       <View style={{
-        height: '19%'
+        height: '19%',
+        justifyContent: 'flex-end'
       }}>
-
+        {renderPromotionCard()}
       </View>
     </Container>
   )
