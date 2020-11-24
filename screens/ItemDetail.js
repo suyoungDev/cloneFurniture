@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import { sin } from 'react-native/Libraries/Animated/src/Easing';
 
 import { COLORS, FONTS, icons, SIZES } from '../constants';
 
@@ -108,20 +109,104 @@ const ItemDetail =({ route, navigation })=>{
           </View>
         </View>
         
+        <View style={{
+          position: 'absolute',
+          bottom: '20%',
+          left: SIZES.padding,
+          right: SIZES.padding
+        }}
+        >
+          <Text style={{
+            color: COLORS.transparentLightGray1, ...FONTS.body2
+          }}>Furniture</Text>
+          <Text style={{color: COLORS.white, ...FONTS.h1, marginTop: SIZES.radius/4}}>{itemInfo.productName}</Text>
+        </View>
         </ImageBackground>
       )
     } else {
       <View>
-
       </View>
     }
-
-
   }
+
+  function renderFooter() {
+    return(
+      <View style={{
+        position: 'absolute',
+        bottom: '5%',
+        left: SIZES.padding,
+        right: SIZES.padding,
+        flexDirection: 'row',
+        height: 70,
+        backgroundColor: COLORS.white,
+        borderRadius: 35,
+      }}>
+        <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+          >
+            <Image 
+              source={icons.dashboard}
+              style={{
+                tintColor: COLORS.gray,
+                width: 25,
+                height: 25
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 50,
+              width: 50,
+              borderRadius: 10,
+              backgroundColor: COLORS.primary,
+            }}
+            onPress={ () => {} }
+          >
+            <Image 
+              source={icons.plus}
+              style={{
+                height: 20,
+                width: 20,
+                tintColor: COLORS.white,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 50,
+              width: 50,
+              borderRadius: 10,
+            }}
+            onPress={ () => {} }
+          >
+            <Image 
+              source={icons.user}
+              style={{
+                tintColor: COLORS.gray,
+                height: 25,
+                width: 25,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
+
 
   return(
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {renderInfo()}
+      {renderFooter()}
     </View>
   )
 }
