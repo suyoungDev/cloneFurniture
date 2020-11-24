@@ -26,6 +26,7 @@ const Title = styled.Text`
   color: ${COLORS.black};
 `;
 
+
 const ScrollableTab = ({ tabList, selectedTab, onPress }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -35,6 +36,8 @@ const ScrollableTab = ({ tabList, selectedTab, onPress }) => {
       <Text style={{ color: COLORS.secondary, ...FONTS.body2 }}>
         {item.name}
       </Text>
+      
+      {/* 인디케이터 */}
       {
         selectedTab.id === item.id && 
         <View style={{alignItems:'center', marginTop:SIZES.base}}>
@@ -51,15 +54,44 @@ const ScrollableTab = ({ tabList, selectedTab, onPress }) => {
         showsHorizontalScrollIndicator={false}
         data={tabList}
         renderItem={renderItem}
-        keyExtractor={ item => `${item.id}` }
+        keyExtractor={ item => item.id.toString() }
       />
     </View>
   )
 }
 
 
-const Home =()=>{
+const ScrollableCard = ({navigation, productList}) => {
+  const renderCard = ({ item }) => (
+    <TouchableOpacity
+      style={{ marginLeft: SIZES.padding }}
+    >
+      <View style={{ width: SIZES.width/2 }}>
+        <Image 
+          source={item.image}
+          resizeMode='cover'
+          style={{width: '100%', height:'100%', borderRadius: SIZES.radius }}
+        />
+      </View>
+    </TouchableOpacity>
+  )
 
+  return(
+    <View style={{ marginTop: SIZES.padding }}>
+      <FlatList 
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={productList}
+        renderItem={renderCard}
+        keyExtractor={item => item.productId.toString()}
+      />
+    </View>
+  )
+}
+
+
+const Home =({navigation})=>{
+  
   // Dummy Data
   const [tabList, setTabList] = React.useState([
     {
@@ -194,7 +226,7 @@ const Home =()=>{
         ]
   })
 
-  // rennder
+  // render
   function renderTitle(title){
     return(
       <View style={{marginTop: SIZES.padding, marginHorizontal: SIZES.padding}}>
@@ -243,6 +275,7 @@ const Home =()=>{
     <Container>
       <StatusBar backgroundColor="white" 
         barStyle='dark-content'></StatusBar>
+
       {renderHeader()}
 
       {renderTitle(selectedTab.title)}
@@ -252,6 +285,20 @@ const Home =()=>{
         selectedTab= {selectedTab}
         onPress={(item) => setSelectedTab(item) }
       />
+
+      <View style={{flex:1}}>
+        <ScrollableCard 
+          navigation={navigation}
+          productList={selectedTab.productList}
+        />
+      </View>
+
+      {/* Footer - Promotion Card */}
+      <View style={{
+        height: '19%'
+      }}>
+
+      </View>
     </Container>
   )
 }
