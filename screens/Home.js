@@ -72,6 +72,22 @@ const ScrollableCard = ({navigation, productList}) => {
           resizeMode='cover'
           style={{width: '100%', height:'100%', borderRadius: SIZES.radius }}
         />
+        <View style={{ position: 'absolute', top: 15, left: '10%', right: '10%'}}>
+          <Text style={{ color: COLORS.lightGray2, ...FONTS.h3 }}>Furniture</Text>
+          <Text style={{ marginTop: SIZES.base, color: COLORS.white, ...FONTS.h2 }}>{item.productName}</Text>
+        </View>
+        
+        <View style={{ 
+          position: 'absolute', 
+          bottom: 15, 
+          left: 15, 
+          borderRadius: 16, 
+          paddingVertical: 7, 
+          paddingHorizontal: 15, 
+          backgroundColor: COLORS.transparentLightGray
+        }}>
+          <Text style={{ ...FONTS.h3}}>$ {item.price.toFixed(2)}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   )
@@ -102,19 +118,19 @@ const Home =({navigation})=>{
                 {
                     productId: 1,
                     productName: 'Chair Green Colour',
-                    price: 10.00,
+                    price: 38.10,
                     image: images.greenChair,
                 },
                 {
                     productId: 2,
                     productName: 'Chair Peach Colour',
-                    price: 10.00,
+                    price: 26.18,
                     image: images.redChair,
                 },
                 {
                     productId: 3,
                     productName: 'Chair White Colour',
-                    price: 10.00,
+                    price: 47.60,
                     image: images.whiteChair,
                 },
             ]
@@ -207,19 +223,19 @@ const Home =({navigation})=>{
         {
             productId: 1,
             productName: 'Chair Green Colour',
-            price: 10.00,
+            price: 38.10,
             image: images.greenChair,
         },
         {
             productId: 2,
             productName: 'Chair Peach Colour',
-            price: 10.00,
+            price: 26.18,
             image: images.redChair,
         },
         {
             productId: 3,
             productName: 'Chair White Colour',
-            price: 10.00,
+            price: 47.60,
             image: images.whiteChair,
         },
 
